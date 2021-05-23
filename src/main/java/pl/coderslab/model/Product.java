@@ -3,6 +3,8 @@ package pl.coderslab.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -12,9 +14,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // to ma być w ShoppingCart
-//    @Column(name = "session_id")
-//    private String sessionId;
     private String name;
 
     @Column(scale=2, precision = 11)
@@ -34,6 +33,9 @@ public class Product {
 
     private LocalDateTime created;
     private LocalDateTime updated;
+
+    @OneToMany(mappedBy = "product")
+    private List<CartItem> cartItems = new ArrayList<>();
 
     @PrePersist
     public void prePersist(){
@@ -115,6 +117,14 @@ public class Product {
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 
     @Override
