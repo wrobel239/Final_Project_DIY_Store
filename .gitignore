@@ -11,6 +11,8 @@ target
 **/target
 **/.idea
 _site/
+*.png
+*.jpg
 
 *.class
 *.jar
