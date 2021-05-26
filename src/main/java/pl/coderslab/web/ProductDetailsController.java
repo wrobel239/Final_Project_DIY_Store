@@ -9,7 +9,6 @@ import pl.coderslab.model.Product;
 import pl.coderslab.service.ProductService;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -31,7 +30,6 @@ public class ProductDetailsController {
                 return "productDetails";
             }
         }
-        // dorobić jeszcze obsługę wyjątku !!!
-        throw new EntityNotFoundException("entity not found or is unavailable");
+        throw new EntityNotFoundException("Product not found or is unavailable");
     }
 }
