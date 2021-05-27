@@ -78,7 +78,7 @@
                                             <img class="sec-img" src="${product.srcImage}" alt="${product.altImage}">
                                         </a>
                                         <div class="cart-hover">
-                                            <button class="btn btn-cart">dodaj do koszyka</button>
+                                            <a href="/shop/productlist/add-to-cart/${product.id}" class="btn btn-cart">dodaj do koszyka</a>
                                         </div>
                                     </figure>
                                     <div class="product-caption text-center">
@@ -96,7 +96,7 @@
                                             <img class="sec-img" src="${product.srcImage}" alt="${product.altImage}">
                                         </a>
                                         <div class="cart-hover">
-                                            <button class="btn btn-cart">dodaj do koszyka</button>
+                                            <a href="/shop/productlist/add-to-cart/${product.id}" class="btn btn-cart">dodaj do koszyka</a>
                                         </div>
                                     </figure>
                                     <div class="product-content-list">
