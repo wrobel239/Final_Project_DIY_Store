@@ -17,7 +17,7 @@ public class ShoppingCart {
     @Column(name = "session_id")
     private String sessionId;
 
-    @OneToMany(mappedBy = "shoppingCart")
+    @OneToMany(mappedBy = "shoppingCart", fetch = FetchType.EAGER)
     private List<CartItem> cartItems = new ArrayList<>();
 
     private LocalDateTime created;

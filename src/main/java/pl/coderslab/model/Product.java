@@ -1,11 +1,17 @@
 package pl.coderslab.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-// dodać jeszcze we wszysktich encjach walidację
+import java.util.Objects;
+
+// dodać jeszcze we wszysktich encjach walidację, w tej encji już chyba ok
 @Entity
 @Table(name = "products")
 public class Product {
@@ -14,14 +20,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
 
+    @DecimalMin(value = "0.01", inclusive = true)
+    @DecimalMax(value = "999999999.99", inclusive = true)
     @Column(scale=2, precision = 11)
     private BigDecimal price;
 
     @Column(name = "is_available")
     private boolean isAvailable;
 
+    @NotBlank
     @Column(columnDefinition = "TEXT")
     private String description;
 
@@ -45,6 +55,19 @@ public class Product {
     @PreUpdate
     public void preUpdate(){
         updated = LocalDateTime.now();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public Long getId() {

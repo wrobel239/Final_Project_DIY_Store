@@ -1,6 +1,8 @@
 package pl.coderslab.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -11,8 +13,12 @@ public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Min(value = 1)
+    @Max(value = 1000000000)
     private int quantity;
 
+    // tutaj walidacji nie potrzeba, wartość uzupełniana na bieżąco
     @Column(scale=2, precision = 11, name = "total_price")
     private BigDecimal totalPrice;
 
@@ -45,8 +51,8 @@ public class CartItem {
         return totalPrice;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotalPrice() {
+        this.totalPrice = product.getPrice().multiply(new BigDecimal(quantity));
     }
 
     public Product getProduct() {
