@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+// dodać jeszcze we wszysktich encjach walidację
 @Entity
 @Table(name = "products")
 public class Product {

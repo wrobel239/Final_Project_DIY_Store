@@ -28,8 +28,8 @@ public class ShoppingCart {
     @Column(name = "is_shipping")
     private boolean isShipping;
 
-    // może enum
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private ShoppingCartStatus status;
 
     @Column(name = "date_of_order")
     private LocalDateTime dateOfOrder;
@@ -93,11 +93,11 @@ public class ShoppingCart {
         isShipping = shipping;
     }
 
-    public String getStatus() {
+    public ShoppingCartStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ShoppingCartStatus status) {
         this.status = status;
     }
 

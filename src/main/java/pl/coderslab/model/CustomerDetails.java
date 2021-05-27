@@ -21,8 +21,8 @@ public class CustomerDetails {
     @Column(name = "company_name")
     private String companyName;
 
-    // może enum
-    private String country;
+    @Enumerated(EnumType.STRING)
+    private CustomerDetailsCountry country;
 
     @Column(name = "street_address")
     private String streetAddress;
@@ -82,11 +82,11 @@ public class CustomerDetails {
         this.companyName = companyName;
     }
 
-    public String getCountry() {
+    public CustomerDetailsCountry getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(CustomerDetailsCountry country) {
         this.country = country;
     }
 
