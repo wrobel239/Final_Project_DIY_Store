@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.WebUtils;
 import pl.coderslab.model.CartItem;
+import pl.coderslab.model.Product;
 import pl.coderslab.model.ShoppingCart;
 import pl.coderslab.service.CartItemService;
+import pl.coderslab.service.ProductService;
 import pl.coderslab.service.ShoppingCartService;
 
 import javax.persistence.EntityNotFoundException;
@@ -20,10 +22,12 @@ import java.util.Optional;
 @RequestMapping("/shop")
 public class CartController {
 
+    private final ProductService productService;
     private final ShoppingCartService shoppingCartService;
     private final CartItemService cartItemService;
 
-    public CartController(ShoppingCartService shoppingCartService, CartItemService cartItemService) {
+    public CartController(ProductService productService, ShoppingCartService shoppingCartService, CartItemService cartItemService) {
+        this.productService = productService;
         this.shoppingCartService = shoppingCartService;
         this.cartItemService = cartItemService;
     }
@@ -57,5 +61,33 @@ public class CartController {
             throw new EntityNotFoundException("You don't have JSESSIONID");
         }
         return "cart";
+    }
+
+    @GetMapping("/cart/add-to-cart/{id}")
+    public String increaseQuantityOfProduct(HttpServletRequest request, @PathVariable long id){
+        Cookie jSessionId = WebUtils.getCookie(request, "JSESSIONID");
+        Optional<Product> product = productService.get(id);
+        if (product.isPresent() && jSessionId != null) {
+            if (product.get().isAvailable()) {
+                shoppingCartService.addToCartProduct(jSessionId.getValue(), product.get(), 1);
+            }
+        } else {
+            // tutaj może jeszcze wewnątrze id dodatkowy throw new
+            throw new EntityNotFoundException("Product not found or you don't have JSESSIONID");
+        }
+        return "redirect:/shop/cart";
+    }
+
+    @GetMapping("/cart/remove-from-cart/{id}")
+    public String removeCartItem(HttpServletRequest request, @PathVariable long id){
+        Cookie jSessionId = WebUtils.getCookie(request, "JSESSIONID");
+        Optional<CartItem> cartItem = cartItemService.get(id);
+        if (cartItem.isPresent() && jSessionId != null){
+            shoppingCartService.removeCartItem(jSessionId.getValue(), cartItem.get());
+        } else {
+            // tutaj może jeszcze wewnątrze id dodatkowy throw new
+            throw new EntityNotFoundException("CartItem not found or you don't have JSESSIONID");
+        }
+        return "redirect:/shop/cart";
     }
 }

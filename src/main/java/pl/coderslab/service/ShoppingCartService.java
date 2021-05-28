@@ -62,4 +62,13 @@ public class ShoppingCartService {
             }
         }
     }
+
+    public void removeCartItem(String jSessionId, CartItem cartItem){
+        // tutaj jeszcze można by dać sprawdzenie, czy status koszyka not_approved
+        if (cartItem.getShoppingCart().getSessionId() != null) {
+            if (cartItem.getShoppingCart().getSessionId().equals(jSessionId)) {
+                cartItemService.deleteById(cartItem);
+            }
+        }
+    }
 }

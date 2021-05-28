@@ -25,6 +25,9 @@ public class ShoppingCart {
     @Column(scale=2, precision = 11, name = "total_price")
     private BigDecimal totalPrice;
 
+    @Column(scale=2, precision = 11, name = "total_price_with_shipping")
+    private BigDecimal totalPriceWithShipping;
+
     @Column(name = "is_shipping")
     private boolean isShipping;
 
@@ -125,6 +128,14 @@ public class ShoppingCart {
         this.customerDetails = customerDetails;
     }
 
+    public BigDecimal getTotalPriceWithShipping() {
+        return totalPriceWithShipping;
+    }
+
+    public void setTotalPriceWithShipping(BigDecimal totalPriceWithShipping) {
+        this.totalPriceWithShipping = totalPriceWithShipping;
+    }
+
     @Override
     public String toString() {
         return "ShoppingCart{" +
@@ -132,6 +143,7 @@ public class ShoppingCart {
                 ", sessionId='" + sessionId + '\'' +
                 ", created=" + created +
                 ", totalPrice=" + totalPrice +
+                ", totalPriceWithShipping=" + totalPriceWithShipping +
                 ", isShipping=" + isShipping +
                 ", status='" + status + '\'' +
                 ", dateOfOrder=" + dateOfOrder +

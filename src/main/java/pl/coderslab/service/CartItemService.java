@@ -47,4 +47,8 @@ public class CartItemService {
         item.setTotalPrice();
         cartItemRepository.save(item);
     }
+
+    public void deleteById(CartItem cartItem){
+        cartItemRepository.deleteById(cartItem.getId());
+    }
 }

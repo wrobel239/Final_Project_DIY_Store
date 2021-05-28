@@ -84,7 +84,9 @@
                                             <span class="dec qtybtn">-</span>
                                         </a>
                                         <span>${cartItem.quantity}</span>
-                                        <a href="#"><span class="inc qtybtn">+</span></a>
+                                        <a href="/shop/cart/add-to-cart/${cartItem.product.id}">
+                                            <span class="inc qtybtn">+</span>
+                                        </a>
                                         <div class="cart-update">
                                             <a href="#" class="btn btn-sqr">Edycja ilości</a>
                                         </div>
@@ -95,7 +97,7 @@
                                         <span>${cartItem.totalPrice} zł</span>
                                     </td>
                                     <td class="pro-remove">
-                                        <a href="#"><i class="fa fa-trash-o"></i></a>
+                                        <a href="/shop/cart/remove-from-cart/${cartItem.id}"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                                 </c:forEach>
