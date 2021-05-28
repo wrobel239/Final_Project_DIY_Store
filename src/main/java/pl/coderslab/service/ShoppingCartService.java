@@ -20,24 +20,24 @@ public class ShoppingCartService {
         this.cartItemService = cartItemService;
     }
 
-    public Optional<ShoppingCart> get (long id) {
+    public Optional<ShoppingCart> get(long id) {
         return shoppingCartRepository.findById(id);
     }
 
-    public ShoppingCart getByJSessionId (String jSessionId){
+    public ShoppingCart getByJSessionId(String jSessionId) {
         return shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
     }
 
-    public void addToCartProduct (String jSessionId, Product product, int quantity){
+    public void addToCartProduct(String jSessionId, Product product, int quantity) {
         ShoppingCart shoppingCart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
-        if (shoppingCart == null){
+        if (shoppingCart == null) {
             shoppingCart = new ShoppingCart();
             shoppingCart.setSessionId(jSessionId);
             shoppingCart.setShipping(false);
             shoppingCart.setStatus(ShoppingCartStatus.NOT_APPROVED);
             shoppingCartRepository.save(shoppingCart);
         }
-        if (quantity >=1){
+        if (quantity >= 1) {
             int isUsed = -1;
             for (CartItem item : shoppingCart.getCartItems()) {
                 Product productFromItems = item.getProduct();
@@ -47,12 +47,12 @@ public class ShoppingCartService {
                 }
             }
             if (isUsed < 0) {
-                cartItemService.createNewCartItem(shoppingCart ,product, quantity);
+                cartItemService.createNewCartItem(shoppingCart, product, quantity);
             }
         }
     }
 
-    public void decreaseQuantity(ShoppingCart shoppingCart ,CartItem cartItem, int quantity) {
+    public void decreaseQuantity(ShoppingCart shoppingCart, CartItem cartItem, int quantity) {
         // tutaj mogłoby być porównywanie po id CartItem, przemyśleć kod, mogłoby być jeszcze coś takiego
 //        if (cartItem.getShoppingCart().getId() == shoppingCart.getId()) -- to może sporo uprościć
         for (CartItem item : shoppingCart.getCartItems()) {
@@ -63,12 +63,35 @@ public class ShoppingCartService {
         }
     }
 
-    public void removeCartItem(String jSessionId, CartItem cartItem){
+    public void removeCartItem(String jSessionId, CartItem cartItem) {
         // tutaj jeszcze można by dać sprawdzenie, czy status koszyka not_approved
         if (cartItem.getShoppingCart().getSessionId() != null) {
             if (cartItem.getShoppingCart().getSessionId().equals(jSessionId)) {
                 cartItemService.deleteById(cartItem);
             }
+        }
+    }
+
+    public void updateCartProduct(String jSessionId, Product product, int quantity) {
+        ShoppingCart shoppingCart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
+        if (shoppingCart == null) {
+            shoppingCart = new ShoppingCart();
+            shoppingCart.setSessionId(jSessionId);
+            shoppingCart.setShipping(false);
+            shoppingCart.setStatus(ShoppingCartStatus.NOT_APPROVED);
+            shoppingCartRepository.save(shoppingCart);
+        }
+        int isUsed = -1;
+        for (CartItem item : shoppingCart.getCartItems()) {
+            Product productFromItems = item.getProduct();
+            if (productFromItems.equals(product)) {
+                // tutaj zrobić update - tylko tutaj zmiana względem add
+                cartItemService.updateCartItem(item, quantity);
+                isUsed = 1;
+            }
+        }
+        if (isUsed < 0) {
+            cartItemService.createNewCartItem(shoppingCart, product, quantity);
         }
     }
 }

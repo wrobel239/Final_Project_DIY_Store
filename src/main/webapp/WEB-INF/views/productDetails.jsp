@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -29,6 +30,11 @@
     <link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/Corano-template/assets/css/plugins/jqueryui.min.css"/>"><!-- main style css -->
     <link rel="stylesheet" href="<c:url value="${pageContext.request.contextPath}/Corano-template/assets/css/style.css"/>">
 </head>
+<style>
+    .errors {
+        color: red;
+    }
+</style>
 <body><!-- Start Header Area -->
 <%@ include file="header.jsp"%>
 
@@ -70,17 +76,24 @@
                                     <p class="pro-desc">${product.description}</p>
                                     <div class="quantity-cart-box d-flex align-items-center"><h6 class="option-title">
                                         Ilość:</h6>
+                                        <form:form method="post" modelAttribute="cartItem">
+                                            <form:hidden path="id"/>
+<%--                                            <form:hidden path="totalPrice"/>--%>
+                                            <form:hidden path="product"/>
+                                            <form:hidden path="shoppingCart"/>
 
-<%--                                        przerobić na formularz--%>
-
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
+                                            <div class="quantity">
+                                                <div class="pro-qty">
+                                                    <form:input path="quantity" id="quantity"/>
+<%--                                                    <input type="text" value="1">--%>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="action_link">
-                                            <a class="btn btn-cart2" href="#">Dodaj do koszyka</a>
-                                        </div>
+                                            <form:errors path="quantity" cssClass="errors"/>
+                                            <div class="action_link">
+                                                <button type="submit" class="btn btn-cart2">Dodaj do koszyka</button>
+<%--                                                <a class="btn btn-cart2" href="#">Dodaj do koszyka</a>--%>
+                                            </div>
+                                        </form:form>
                                     </div>
                                 </div>
                             </div>

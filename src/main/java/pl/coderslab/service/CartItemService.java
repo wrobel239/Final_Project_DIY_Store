@@ -25,7 +25,7 @@ public class CartItemService {
         if (quantity > 0) {
             if (cartItem.getQuantity() > quantity) {
                 cartItem.setQuantity(cartItem.getQuantity() - quantity);
-                cartItem.setTotalPrice();
+                cartItem.calculateTotalPrice();
                 cartItemRepository.save(cartItem);
             } else {
                 cartItemRepository.deleteById(cartItem.getId());
@@ -35,7 +35,13 @@ public class CartItemService {
 
     public void increaseQuantity(CartItem cartItem, int quantity) {
         cartItem.setQuantity(cartItem.getQuantity() + quantity);
-        cartItem.setTotalPrice();
+        cartItem.calculateTotalPrice();
+        cartItemRepository.save(cartItem);
+    }
+
+    public void updateCartItem(CartItem cartItem, int quantity) {
+        cartItem.setQuantity(quantity);
+        cartItem.calculateTotalPrice();
         cartItemRepository.save(cartItem);
     }
 
@@ -44,7 +50,7 @@ public class CartItemService {
         item.setShoppingCart(shoppingCart);
         item.setProduct(product);
         item.setQuantity(quantity);
-        item.setTotalPrice();
+        item.calculateTotalPrice();
         cartItemRepository.save(item);
     }
 
