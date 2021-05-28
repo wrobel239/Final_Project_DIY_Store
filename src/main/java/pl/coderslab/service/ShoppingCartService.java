@@ -24,6 +24,10 @@ public class ShoppingCartService {
         return shoppingCartRepository.findById(id);
     }
 
+    public ShoppingCart getByJSessionId (String jSessionId){
+        return shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
+    }
+
     public void addToCartProduct (String jSessionId, Product product, int quantity){
         ShoppingCart shoppingCart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
         if (shoppingCart == null){

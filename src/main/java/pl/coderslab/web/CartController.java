@@ -36,14 +36,26 @@ public class CartController {
         if (shoppingCart.isPresent() && cartItem.isPresent() && jSessionId != null  && quantity >=1) {
             ShoppingCart cart = shoppingCart.get();
             // ten if tylko na chwilę próby zakomentowany
-//            if (jSessionId.getValue().equals(cart.getSessionId())) {
+            if (jSessionId.getValue().equals(cart.getSessionId())) {
                 shoppingCartService.decreaseQuantity(cart, cartItem.get(), quantity);
-//            }
+            }
         } else {
             // tutaj może jeszcze wewnątrze id dodatkowy throw new
             throw new EntityNotFoundException("ShoppingCart not found or you don't have access");
         }
         // tutaj dokończyć
+        return "redirect:/shop/cart";
+    }
+
+    @GetMapping("/cart")
+    public String showCart(HttpServletRequest request, Model model){
+        Cookie jSessionId = WebUtils.getCookie(request, "JSESSIONID");
+        if (jSessionId != null){
+            ShoppingCart shoppingCart = shoppingCartService.getByJSessionId(jSessionId.getValue());
+            model.addAttribute("shoppingCart", shoppingCart);
+        } else {
+            throw new EntityNotFoundException("You don't have JSESSIONID");
+        }
         return "cart";
     }
 }
