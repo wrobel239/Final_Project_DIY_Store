@@ -6,6 +6,7 @@ import pl.coderslab.model.Product;
 import pl.coderslab.model.ShoppingCart;
 import pl.coderslab.repository.CartItemRepository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -44,6 +45,17 @@ public class CartItemService {
         cartItem.calculateTotalPrice();
         cartItemRepository.save(cartItem);
     }
+
+    // dodane dla sprawdzenia
+    public void updateCartItem(CartItem cartItem, int quantity, BigDecimal price) {
+        cartItem.setQuantity(quantity);
+        // dodane dla sprawdzenia
+        cartItem.setTotalPrice(price);
+        // koniec sprawdzenia
+//        cartItem.calculateTotalPrice(); // na chwilę zakomentowane, odkomentować potem
+        cartItemRepository.save(cartItem);
+    }
+    // koniec sprawdzenia
 
     public void createNewCartItem (ShoppingCart shoppingCart, Product product, int quantity){
         CartItem item = new CartItem();

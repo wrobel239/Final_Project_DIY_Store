@@ -79,8 +79,8 @@
                                         <form:form method="post" modelAttribute="cartItem">
                                             <form:hidden path="id"/>
 <%--                                            <form:hidden path="totalPrice"/>--%>
-                                            <form:hidden path="product"/>
-                                            <form:hidden path="shoppingCart"/>
+<%--                                            <form:hidden path="product"/>--%>
+<%--                                            <form:hidden path="shoppingCart"/>--%>
 
                                             <div class="quantity">
                                                 <div class="pro-qty">
@@ -89,6 +89,10 @@
                                                 </div>
                                             </div>
                                             <form:errors path="quantity" cssClass="errors"/>
+<%--                                            dodane odtąd--%>
+                                            <form:input path="totalPrice" id="totalPrice"/>
+                                            <form:errors path="totalPrice" cssClass="errors"/>
+<%--                                            tutaj koniec--%>
                                             <div class="action_link">
                                                 <button type="submit" class="btn btn-cart2">Dodaj do koszyka</button>
 <%--                                                <a class="btn btn-cart2" href="#">Dodaj do koszyka</a>--%>

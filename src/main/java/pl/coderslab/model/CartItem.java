@@ -24,13 +24,34 @@ public class CartItem {
 
 //    tutaj walidacji nie może być, bo wywala błędy, bo pola te również walidowane, a wprowadzane tylko quantity
 //    @NotNull
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Product product;
 
 //    @NotNull
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
+
+    // dodane dla sprawdzenia
+    @Transient
+    private double totalPriceInDouble;
+
+    public double getTotalPriceInDouble() {
+        return totalPriceInDouble;
+    }
+
+    public void setTotalPriceInDouble(double totalPriceInDouble) {
+        this.totalPriceInDouble = totalPriceInDouble;
+    }
+
+    public void setTotalPriceInDoubleFromTotalPrice(){
+        this.totalPriceInDouble = this.totalPrice.doubleValue();
+    }
+
+    public void setTotalPriceFromPriceInDouble(double price) {
+        this.totalPrice = BigDecimal.valueOf(price);
+    }
+    // koniec sprawdzenia
 
     public Long getId() {
         return id;

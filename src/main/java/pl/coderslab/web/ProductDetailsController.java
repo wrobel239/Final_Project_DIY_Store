@@ -37,6 +37,10 @@ public class ProductDetailsController {
             if (product.get().isAvailable()) {
                 CartItem cartItem = new CartItem();
                 cartItem.setQuantity(1);
+                // dodane do sprawdzenia
+                cartItem.setTotalPrice(new BigDecimal("8.04"));
+//                cartItem.setTotalPriceInDoubleFromTotalPrice();
+                // koniec sprawdzenia
 //                cartItem.setTotalPrice(new BigDecimal("2"));
                 model.addAttribute("product", product.get());
                 model.addAttribute("cartItem", cartItem);
@@ -56,7 +60,9 @@ public class ProductDetailsController {
                     model.addAttribute("product", product.get());
                     return "productDetails";
                 }
-                shoppingCartService.updateCartProduct(jSessionId.getValue(), product.get(), cartItem.getQuantity());
+                // tutaj zmienione
+                shoppingCartService.updateCartProduct(jSessionId.getValue(), product.get(), cartItem.getQuantity(), cartItem.getTotalPrice());
+                // koniec zmian, bez ostatniego parametru getTotalPrice powinno być
             }
         } else {
             // tutaj może jeszcze wewnątrze id dodatkowy throw new
