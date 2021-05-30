@@ -104,43 +104,41 @@
                                 </tbody>
                             </table>
                         </div><!-- Cart Update Option -->
-
-<%--                        odtąd jeszcze zmienić--%>
-
-                        <div class="cart-update-option d-block d-md-flex justify-content-between">
-                            <div class="apply-coupon-wrapper">
-                                <form action="#" method="post" class=" d-block d-md-flex"><input type="text"
-                                                                                                 placeholder="Enter Your Coupon Code"
-                                                                                                 required/>
-                                    <button class="btn btn-sqr">Apply Coupon</button>
-                                </form>
-                            </div>
-                            <div class="cart-update"><a href="#" class="btn btn-sqr">Update Cart</a></div>
-                        </div>
+<%--                        <div class="cart-update-option d-block d-md-flex justify-content-between">--%>
+<%--                            <div class="apply-coupon-wrapper">--%>
+<%--                                <form action="#" method="post" class=" d-block d-md-flex"><input type="text"--%>
+<%--                                                                                                 placeholder="Enter Your Coupon Code"--%>
+<%--                                                                                                 required/>--%>
+<%--                                    <button class="btn btn-sqr">Apply Coupon</button>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
+<%--                            <div class="cart-update"><a href="#" class="btn btn-sqr">Update Cart</a></div>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-5 ml-auto"><!-- Cart Calculation Area -->
                         <div class="cart-calculator-wrapper">
-                            <div class="cart-calculate-items"><h6>Cart Totals</h6>
+                            <div class="cart-calculate-items"><h6>Podsumowanie koszyka</h6>
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <tr>
-                                            <td>Sub Total</td>
-                                            <td>$230</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shipping</td>
-                                            <td>$70</td>
-                                        </tr>
+<%--                                        <tr>--%>
+<%--                                            <td>Sub Total</td>--%>
+<%--                                            <td>$230</td>--%>
+<%--                                        </tr>--%>
+<%--                                        <tr>--%>
+<%--                                            <td>Shipping</td>--%>
+<%--                                            <td>$70</td>--%>
+<%--                                        </tr>--%>
                                         <tr class="total">
-                                            <td>Total</td>
-                                            <td class="total-amount">$300</td>
+                                            <td>Cena całkowita koszyka</td>
+                                            <td class="total-amount">${shoppingCart.totalPrice} zł</td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
-                            <a href="checkout.html" class="btn btn-sqr d-block">Proceed Checkout</a></div>
+                            <a href="checkout.html" class="btn btn-sqr d-block">Przejdź do wyboru dostawy</a>
+                        </div>
                     </div>
                 </div>
             </div>

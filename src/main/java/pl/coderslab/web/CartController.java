@@ -16,6 +16,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Controller
@@ -56,6 +57,10 @@ public class CartController {
         Cookie jSessionId = WebUtils.getCookie(request, "JSESSIONID");
         if (jSessionId != null) {
             ShoppingCart shoppingCart = shoppingCartService.getByJSessionId(jSessionId.getValue());
+            if (shoppingCart == null){
+                shoppingCart = new ShoppingCart();
+                shoppingCart.setTotalPrice(new BigDecimal("0"));
+            }
             model.addAttribute("shoppingCart", shoppingCart);
         } else {
             throw new EntityNotFoundException("You don't have JSESSIONID");

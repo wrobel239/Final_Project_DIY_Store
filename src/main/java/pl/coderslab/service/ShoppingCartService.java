@@ -52,6 +52,9 @@ public class ShoppingCartService {
                 cartItemService.createNewCartItem(shoppingCart, product, quantity);
             }
         }
+        ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
+        calculateTotalPriceAndTotalPriceWithShipping(cart);
+        shoppingCartRepository.save(cart);
     }
 
     public void decreaseQuantity(ShoppingCart shoppingCart, CartItem cartItem, int quantity) {
@@ -63,6 +66,9 @@ public class ShoppingCartService {
                 cartItemService.decreaseQuantity(cartItem, quantity);
             }
         }
+        Optional<ShoppingCart> cart = get(shoppingCart.getId());
+        calculateTotalPriceAndTotalPriceWithShipping(cart.get());
+        shoppingCartRepository.save(cart.get());
     }
 
     public void removeCartItem(String jSessionId, CartItem cartItem) {
@@ -72,6 +78,9 @@ public class ShoppingCartService {
                 cartItemService.deleteById(cartItem);
             }
         }
+        ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
+        calculateTotalPriceAndTotalPriceWithShipping(cart);
+        shoppingCartRepository.save(cart);
     }
 
     public void updateCartProduct(String jSessionId, Product product, int quantity) {
@@ -97,6 +106,9 @@ public class ShoppingCartService {
         if (isUsed < 0) {
             cartItemService.createNewCartItem(shoppingCart, product, quantity);
         }
+        ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
+        calculateTotalPriceAndTotalPriceWithShipping(cart);
+        shoppingCartRepository.save(cart);
     }
 
     public void updateCartItem(String jSessionId, CartItem cartItem, CartItem item){
@@ -106,6 +118,9 @@ public class ShoppingCartService {
         } else {
             throw new EntityNotFoundException("Id CartItem przekazanego w formularzu i podanego w URL są różne");
         }
+        ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
+        calculateTotalPriceAndTotalPriceWithShipping(cart);
+        shoppingCartRepository.save(cart);
     }
 
     public void checkIfPermittedAccessToCartItem(String jSessionId, CartItem cartItem) {
