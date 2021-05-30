@@ -137,7 +137,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <a href="checkout.html" class="btn btn-sqr d-block">Przejdź do wyboru dostawy</a>
+                            <a href="/shop/chooseShipping" class="btn btn-sqr d-block">Przejdź do wyboru dostawy</a>
                         </div>
                     </div>
                 </div>

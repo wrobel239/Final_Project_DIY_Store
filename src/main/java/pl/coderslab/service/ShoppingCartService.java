@@ -123,6 +123,16 @@ public class ShoppingCartService {
         shoppingCartRepository.save(cart);
     }
 
+    public void updateShipping(ShoppingCart shoppingCart, String shipping){
+        if (shipping.equals("true")){
+            shoppingCart.setShipping(true);
+        } else {
+            shoppingCart.setShipping(false);
+        }
+        calculateTotalPriceWithShipping(shoppingCart);
+        shoppingCartRepository.save(shoppingCart);
+    }
+
     public void checkIfPermittedAccessToCartItem(String jSessionId, CartItem cartItem) {
         // tutaj jeszcze można by dać sprawdzenie, czy status koszyka not_approved
         if (cartItem.getShoppingCart().getSessionId() != null) {

@@ -51,6 +51,7 @@
                                                 <li class="mega-title"><span>Kolumna 03</span>
                                                     <ul>
                                                         <li><a href="/shop/cart">Koszyk</a></li>
+                                                        <li><a href="/shop/chooseShipping">Wybór dostawy</a></li>
                                                         <li><a href="checkout.html">Dane zamawiającego i płatności</a></li>
                                                     </ul>
                                                 </li>

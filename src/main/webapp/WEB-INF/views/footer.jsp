@@ -170,8 +170,10 @@
                 <%--                        <li class="total"><span>total</span><span><strong>$370.00</strong></span></li>--%>
                 <%--                    </ul>--%>
                 <%--                </div>--%>
-                <div class="minicart-button"><a href="/shop/cart"><i class="fa fa-shopping-cart"></i>Koszyk</a><a
-                        href="cart.html"><i class="fa fa-share"></i>Dane zamawiającego i płatności</a></div>
+                <div class="minicart-button"><a href="/shop/cart"><i class="fa fa-shopping-cart"></i>Koszyk</a>
+                    <a href="/shop/chooseShipping">Wybór dostawy</a>
+                    <a href="cart.html"><i class="fa fa-share"></i>Dane zamawiającego i płatności</a>
+                </div>
             </div>
         </div>
     </div>
