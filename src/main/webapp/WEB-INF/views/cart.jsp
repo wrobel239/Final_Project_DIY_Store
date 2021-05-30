@@ -73,7 +73,7 @@
                                         <img class="img-fluid" src="${cartItem.product.srcImage}" alt="${cartItem.product.altImage}"/>
                                     </td>
                                     <td class="pro-title">
-                                        <a href="/shop/productdetails/${cartItem.product.id}">${cartItem.product.name}</a>
+                                        <a href="/shop/cart/updateCartItem/${cartItem.id}">${cartItem.product.name}</a>
                                     </td>
                                     <td class="pro-price">
                                         <span>${cartItem.product.price} zł</span>
@@ -88,7 +88,7 @@
                                             <span class="inc qtybtn">+</span>
                                         </a>
                                         <div class="cart-update">
-                                            <a href="#" class="btn btn-sqr">Edycja ilości</a>
+                                            <a href="/shop/cart/updateCartItem/${cartItem.id}" class="btn btn-sqr">Edycja ilości</a>
                                         </div>
 <%--                                            <input type="text" value="1">--%>
 <%--                                        </div>--%>

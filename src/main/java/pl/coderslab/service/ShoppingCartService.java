@@ -7,6 +7,7 @@ import pl.coderslab.model.ShoppingCart;
 import pl.coderslab.model.ShoppingCartStatus;
 import pl.coderslab.repository.ShoppingCartRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -98,4 +99,45 @@ public class ShoppingCartService {
         }
     }
 
+    public void updateCartItem(String jSessionId, CartItem cartItem, CartItem item){
+        checkIfPermittedAccessToCartItem(jSessionId, item);
+        if (item.getId() == cartItem.getId()){
+            cartItemService.updateCartItem(item, cartItem.getQuantity());
+        } else {
+            throw new EntityNotFoundException("Id CartItem przekazanego w formularzu i podanego w URL są różne");
+        }
+    }
+
+    public void checkIfPermittedAccessToCartItem(String jSessionId, CartItem cartItem) {
+        // tutaj jeszcze można by dać sprawdzenie, czy status koszyka not_approved
+        if (cartItem.getShoppingCart().getSessionId() != null) {
+            if (!cartItem.getShoppingCart().getSessionId().equals(jSessionId)) {
+                throw new EntityNotFoundException("Nie masz dostępu do danego CartItem");
+            }
+        } else {
+            throw new EntityNotFoundException("Nie masz dostępu do danego CartItem");
+        }
+    }
+
+    public void calculateTotalPriceAndTotalPriceWithShipping(ShoppingCart shoppingCart){
+        BigDecimal totalPrice = new BigDecimal("0");
+        for (CartItem item : shoppingCart.getCartItems()){
+            totalPrice = totalPrice.add(item.getTotalPrice());
+        }
+        shoppingCart.setTotalPrice(totalPrice);
+        if (shoppingCart.isShipping()){
+            shoppingCart.setTotalPriceWithShipping(totalPrice.add(new BigDecimal("50")));
+        } else {
+            shoppingCart.setTotalPriceWithShipping(totalPrice);
+        }
+    }
+
+    public void calculateTotalPriceWithShipping(ShoppingCart shoppingCart){
+        BigDecimal totalPrice = shoppingCart.getTotalPrice();
+        if (shoppingCart.isShipping()){
+            shoppingCart.setTotalPriceWithShipping(totalPrice.add(new BigDecimal("50")));
+        } else {
+            shoppingCart.setTotalPriceWithShipping(totalPrice);
+        }
+    }
 }

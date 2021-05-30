@@ -57,6 +57,7 @@ public class ProductDetailsController {
                 }
                 shoppingCartService.updateCartProduct(jSessionId.getValue(), product.get(), cartItem.getQuantity());
             }
+            // tutaj usunąć else i przełożyć return powyżej
         } else {
             // tutaj może jeszcze wewnątrze id dodatkowy throw new
             throw new EntityNotFoundException("Product not found or you don't have JSESSIONID");
