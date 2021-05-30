@@ -80,9 +80,11 @@ public class ShoppingCartService {
             shoppingCart.setSessionId(jSessionId);
             shoppingCart.setShipping(false);
             shoppingCart.setStatus(ShoppingCartStatus.NOT_APPROVED);
+            // może tutaj ustawić jeszcze set TotalPrice i TotalPriceWithShipping na 0
             shoppingCartRepository.save(shoppingCart);
         }
         int isUsed = -1;
+        // zamiast tego for może stream - przy refactor o tym pomyśleć !!!
         for (CartItem item : shoppingCart.getCartItems()) {
             Product productFromItems = item.getProduct();
             if (productFromItems.equals(product)) {
@@ -96,28 +98,4 @@ public class ShoppingCartService {
         }
     }
 
-    // odtąd dodane
-    public void updateCartProduct(String jSessionId, Product product, int quantity, BigDecimal price) {
-        ShoppingCart shoppingCart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
-        if (shoppingCart == null) {
-            shoppingCart = new ShoppingCart();
-            shoppingCart.setSessionId(jSessionId);
-            shoppingCart.setShipping(false);
-            shoppingCart.setStatus(ShoppingCartStatus.NOT_APPROVED);
-            shoppingCartRepository.save(shoppingCart);
-        }
-        int isUsed = -1;
-        for (CartItem item : shoppingCart.getCartItems()) {
-            Product productFromItems = item.getProduct();
-            if (productFromItems.equals(product)) {
-                // tutaj zrobić update - tylko tutaj zmiana względem add
-                cartItemService.updateCartItem(item, quantity, price);
-                isUsed = 1;
-            }
-        }
-        if (isUsed < 0) {
-            cartItemService.createNewCartItem(shoppingCart, product, quantity);
-        }
-    }
-    // koniec dodania
 }

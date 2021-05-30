@@ -14,8 +14,8 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Min(value = 1)
-    @Max(value = 1000000000)
+    @Min(value = 1, message = "Musi być przynajmniej 1 i maksymalnie milion")
+    @Max(value = 1000000, message = "Musi być przynajmniej 1 i maksymalnie milion")
     private int quantity;
 
     // tutaj walidacji nie potrzeba, wartość uzupełniana na bieżąco
@@ -31,27 +31,6 @@ public class CartItem {
     @ManyToOne(optional = false)
     @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
-
-    // dodane dla sprawdzenia
-    @Transient
-    private double totalPriceInDouble;
-
-    public double getTotalPriceInDouble() {
-        return totalPriceInDouble;
-    }
-
-    public void setTotalPriceInDouble(double totalPriceInDouble) {
-        this.totalPriceInDouble = totalPriceInDouble;
-    }
-
-    public void setTotalPriceInDoubleFromTotalPrice(){
-        this.totalPriceInDouble = this.totalPrice.doubleValue();
-    }
-
-    public void setTotalPriceFromPriceInDouble(double price) {
-        this.totalPrice = BigDecimal.valueOf(price);
-    }
-    // koniec sprawdzenia
 
     public Long getId() {
         return id;

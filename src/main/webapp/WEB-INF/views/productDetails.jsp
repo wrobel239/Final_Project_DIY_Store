@@ -89,10 +89,6 @@
                                                 </div>
                                             </div>
                                             <form:errors path="quantity" cssClass="errors"/>
-<%--                                            dodane odtąd--%>
-                                            <form:input path="totalPrice" id="totalPrice"/>
-                                            <form:errors path="totalPrice" cssClass="errors"/>
-<%--                                            tutaj koniec--%>
                                             <div class="action_link">
                                                 <button type="submit" class="btn btn-cart2">Dodaj do koszyka</button>
 <%--                                                <a class="btn btn-cart2" href="#">Dodaj do koszyka</a>--%>

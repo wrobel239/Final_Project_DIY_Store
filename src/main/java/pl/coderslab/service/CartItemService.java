@@ -46,17 +46,6 @@ public class CartItemService {
         cartItemRepository.save(cartItem);
     }
 
-    // dodane dla sprawdzenia
-    public void updateCartItem(CartItem cartItem, int quantity, BigDecimal price) {
-        cartItem.setQuantity(quantity);
-        // dodane dla sprawdzenia
-        cartItem.setTotalPrice(price);
-        // koniec sprawdzenia
-//        cartItem.calculateTotalPrice(); // na chwilę zakomentowane, odkomentować potem
-        cartItemRepository.save(cartItem);
-    }
-    // koniec sprawdzenia
-
     public void createNewCartItem (ShoppingCart shoppingCart, Product product, int quantity){
         CartItem item = new CartItem();
         item.setShoppingCart(shoppingCart);
