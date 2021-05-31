@@ -22,6 +22,7 @@ public class CustomerDetails {
     @Column(name = "last_name")
     private String lastName;
 
+    @NotBlank(message = "Należy wprowadzić poprawny email")
     @Email(message = "Należy wprowadzić poprawny email")
     private String email;
 
@@ -41,10 +42,10 @@ public class CustomerDetails {
     @NotBlank(message = "Pole musi być niepuste")
     private String voivodeship;
 
-    @Pattern(regexp = "dd-ddd", message = "Kod pocztowy musi być w formacie: dd-ddd")
+    @Pattern(regexp = "^\\d{2}-\\d{3}$", message = "Kod pocztowy musi być w formacie: dd-ddd")
     private String postcode;
 
-    @Pattern(regexp = "[+]?d{9,}", message = "Numer telefonu musi być w formacie bez spacji i nawiasów i zawierać co najmniej 9 cyfr: +ddddddddd lub ddddddddd")
+    @Pattern(regexp = "^[\\+]?\\d{9,}$", message = "Numer telefonu musi być w formacie bez spacji i nawiasów i zawierać co najmniej 9 cyfr: +ddddddddd lub ddddddddd")
     private String phone;
 
     @Column(name = "order_note", columnDefinition = "TEXT")

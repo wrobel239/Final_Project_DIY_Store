@@ -52,7 +52,7 @@
                                                     <ul>
                                                         <li><a href="/shop/cart">Koszyk</a></li>
                                                         <li><a href="/shop/chooseShipping">Wybór dostawy</a></li>
-                                                        <li><a href="checkout.html">Dane zamawiającego i płatności</a></li>
+                                                        <li><a href="/shop/checkout">Dane zamawiającego i płatności</a></li>
                                                     </ul>
                                                 </li>
                                                 <%--                                                <li class="mega-title"><span>column 04</span>--%>

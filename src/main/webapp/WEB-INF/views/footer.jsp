@@ -172,7 +172,7 @@
                 <%--                </div>--%>
                 <div class="minicart-button"><a href="/shop/cart"><i class="fa fa-shopping-cart"></i>Koszyk</a>
                     <a href="/shop/chooseShipping">Wybór dostawy</a>
-                    <a href="cart.html"><i class="fa fa-share"></i>Dane zamawiającego i płatności</a>
+                    <a href="/shop/checkout"><i class="fa fa-share"></i>Dane zamawiającego i płatności</a>
                 </div>
             </div>
         </div>

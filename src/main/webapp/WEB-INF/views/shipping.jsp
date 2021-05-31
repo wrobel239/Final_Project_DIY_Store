@@ -141,7 +141,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <a href="/shop/chooseShipping" class="btn btn-sqr d-block">Przejdź do danych zamawiającego i
+                            <a href="/shop/checkout" class="btn btn-sqr d-block">Przejdź do danych zamawiającego i
                                 płatności</a>
                         </div>
                     </div>

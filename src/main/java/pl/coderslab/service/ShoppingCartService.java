@@ -1,14 +1,12 @@
 package pl.coderslab.service;
 
 import org.springframework.stereotype.Service;
-import pl.coderslab.model.CartItem;
-import pl.coderslab.model.Product;
-import pl.coderslab.model.ShoppingCart;
-import pl.coderslab.model.ShoppingCartStatus;
+import pl.coderslab.model.*;
 import pl.coderslab.repository.ShoppingCartRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -164,5 +162,12 @@ public class ShoppingCartService {
         } else {
             shoppingCart.setTotalPriceWithShipping(totalPrice);
         }
+    }
+
+    public void addCustomerDetails (CustomerDetails customerDetails, ShoppingCart shoppingCart){
+        shoppingCart.setCustomerDetails(customerDetails);
+        shoppingCart.setStatus(ShoppingCartStatus.APPROVED);
+        shoppingCart.setDateOfOrder(LocalDateTime.now());
+        shoppingCartRepository.save(shoppingCart);
     }
 }
