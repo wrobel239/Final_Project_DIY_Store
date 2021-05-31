@@ -1,5 +1,7 @@
 package pl.coderslab.model;
-// ten enum chyba niepotrzebny
-public enum CustomerDetailsTypeOfPayment {
 
+public enum CustomerDetailsTypeOfPayment {
+    CASH_ON_DELIVERY,
+    BANK_TRANSFER,
+    PAYPAL
 }

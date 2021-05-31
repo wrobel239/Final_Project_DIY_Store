@@ -41,7 +41,7 @@ public class ShippingController {
     }
 
     @PostMapping("/chooseShipping")
-    public String confirmShipping(HttpServletRequest request, @RequestParam String shipping){
+    public String confirmShipping(HttpServletRequest request, @RequestParam(defaultValue = "No parameter") String shipping){
         Cookie jSessionId = WebUtils.getCookie(request, "JSESSIONID");
         if (jSessionId != null){
             ShoppingCart shoppingCart = shoppingCartService.getByJSessionId(jSessionId.getValue());
@@ -52,6 +52,6 @@ public class ShippingController {
                 }
             }
         }
-        throw new EntityNotFoundException("Koszyk jest pusty lub nie masz ciasteczka JSESSIONID lub dane wysłane z formularza są niepoprawne");
+        throw new EntityNotFoundException("Koszyk jest pusty lub nie masz ciasteczka JSESSIONID lub dane wysłane z formularza są niepoprawne (musisz zaznaczyć wybrane pole)");
     }
 }

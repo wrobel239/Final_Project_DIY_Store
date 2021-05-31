@@ -1,7 +1,10 @@
 package pl.coderslab.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "customer_details")
@@ -11,11 +14,15 @@ public class CustomerDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Pole musi być niepuste")
     @Column(name = "first_name")
     private String firstName;
 
+    @NotBlank(message = "Pole musi być niepuste")
     @Column(name = "last_name")
     private String lastName;
+
+    @Email(message = "Należy wprowadzić poprawny email")
     private String email;
 
     @Column(name = "company_name")
@@ -24,22 +31,30 @@ public class CustomerDetails {
     @Enumerated(EnumType.STRING)
     private CustomerDetailsCountry country;
 
+    @NotBlank(message = "Pole musi być niepuste")
     @Column(name = "street_address")
     private String streetAddress;
+
+    @NotBlank(message = "Pole musi być niepuste")
     private String town;
+
+    @NotBlank(message = "Pole musi być niepuste")
     private String voivodeship;
+
+    @Pattern(regexp = "dd-ddd", message = "Kod pocztowy musi być w formacie: dd-ddd")
     private String postcode;
+
+    @Pattern(regexp = "[+]?d{9,}", message = "Numer telefonu musi być w formacie bez spacji i nawiasów i zawierać co najmniej 9 cyfr: +ddddddddd lub ddddddddd")
     private String phone;
 
     @Column(name = "order_note", columnDefinition = "TEXT")
     private String orderNote;
 
-    // może enum
+    @Enumerated(EnumType.STRING)
     @Column(name = "type_of_payment")
-    private String typeOfPayment;
+    private CustomerDetailsTypeOfPayment typeOfPayment;
 
-    @NotNull
-    @OneToOne(mappedBy = "customerDetails")
+    @OneToOne(mappedBy = "customerDetails", optional = false)
     private ShoppingCart shoppingCart;
 
     public Long getId() {
@@ -138,11 +153,11 @@ public class CustomerDetails {
         this.orderNote = orderNote;
     }
 
-    public String getTypeOfPayment() {
+    public CustomerDetailsTypeOfPayment getTypeOfPayment() {
         return typeOfPayment;
     }
 
-    public void setTypeOfPayment(String typeOfPayment) {
+    public void setTypeOfPayment(CustomerDetailsTypeOfPayment typeOfPayment) {
         this.typeOfPayment = typeOfPayment;
     }
 
