@@ -78,20 +78,14 @@
                                         Ilość:</h6>
                                         <form:form method="post" modelAttribute="cartItem">
                                             <form:hidden path="id"/>
-<%--                                            <form:hidden path="totalPrice"/>--%>
-<%--                                            <form:hidden path="product"/>--%>
-<%--                                            <form:hidden path="shoppingCart"/>--%>
-
                                             <div class="quantity">
                                                 <div class="pro-qty">
                                                     <form:input path="quantity" id="quantity"/>
-<%--                                                    <input type="text" value="1">--%>
                                                 </div>
                                             </div>
                                             <form:errors path="quantity" cssClass="errors"/>
                                             <div class="action_link">
                                                 <button type="submit" class="btn btn-cart2">Dodaj do koszyka</button>
-<%--                                                <a class="btn btn-cart2" href="#">Dodaj do koszyka</a>--%>
                                             </div>
                                         </form:form>
                                     </div>
@@ -104,7 +98,7 @@
                             <div class="col-lg-12">
                                 <div class="product-review-info">
                                     <ul class="nav review-tab">
-                                        <li><a class="active" data-toggle="tab" <%--href="#tab_one"--%>>opis</a></li>
+                                        <li><a class="active" data-toggle="tab">opis</a></li>
                                     </ul>
                                     <div class="tab-content reviews-tab">
                                         <div class="tab-pane fade show active" id="tab_one">

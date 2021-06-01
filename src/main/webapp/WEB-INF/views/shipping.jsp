@@ -45,11 +45,6 @@
     <link rel="stylesheet"
           href="<c:url value="${pageContext.request.contextPath}/Corano-template/assets/css/style.css"/>">
 </head>
-<%--<style>--%>
-<%--    .errors {--%>
-<%--        color: red;--%>
-<%--    }--%>
-<%--</style>--%>
 <body><!-- Start Header Area -->
 <%@ include file="header.jsp" %>
 
@@ -103,19 +98,7 @@
                                     </ul>
                                     <button type="submit" class="btn btn-sqr">Potwierdź dostawę</button>
                                 </form>
-
 <%--                                Formularz z bindowaniem z radiobutton lub checkbox nie działał, chyba kwestia szablonu--%>
-
-<%--                                <form:form method="post" action="/shop/chooseShipping" modelAttribute="shippingPojo"--%>
-<%--                                           class=" d-block d-md-flex">--%>
-<%--                                    <form:radiobutton path="isShipping" value="true"/>--%>
-<%--                                    <form:radiobutton path="isShipping" value="false"/>--%>
-
-<%--                                    <form:checkbox path="isShipping"/>--%>
-<%--                                    <form:errors path="isShipping" cssClass="errors"/>--%>
-<%--                                    <button type="submit" class="btn btn-sqr">Potwierdź dostawę</button>--%>
-<%--                                </form:form>--%>
-
                             </div>
                         </div>
                     </div>

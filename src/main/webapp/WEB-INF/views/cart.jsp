@@ -79,7 +79,6 @@
                                         <span>${cartItem.product.price} zł</span>
                                     </td>
                                     <td class="pro-quantity">
-<%--                                        <div class="pro-qty">--%>
                                         <a href="/shop/cart/${shoppingCart.id}/decreaseQuantity/${cartItem.id}/1">
                                             <span class="dec qtybtn">-</span>
                                         </a>
@@ -90,8 +89,6 @@
                                         <div class="cart-update">
                                             <a href="/shop/cart/updateCartItem/${cartItem.id}" class="btn btn-sqr">Edycja ilości</a>
                                         </div>
-<%--                                            <input type="text" value="1">--%>
-<%--                                        </div>--%>
                                     </td>
                                     <td class="pro-subtotal">
                                         <span>${cartItem.totalPrice} zł</span>
@@ -104,16 +101,6 @@
                                 </tbody>
                             </table>
                         </div><!-- Cart Update Option -->
-<%--                        <div class="cart-update-option d-block d-md-flex justify-content-between">--%>
-<%--                            <div class="apply-coupon-wrapper">--%>
-<%--                                <form action="#" method="post" class=" d-block d-md-flex"><input type="text"--%>
-<%--                                                                                                 placeholder="Enter Your Coupon Code"--%>
-<%--                                                                                                 required/>--%>
-<%--                                    <button class="btn btn-sqr">Apply Coupon</button>--%>
-<%--                                </form>--%>
-<%--                            </div>--%>
-<%--                            <div class="cart-update"><a href="#" class="btn btn-sqr">Update Cart</a></div>--%>
-<%--                        </div>--%>
                     </div>
                 </div>
                 <div class="row">
@@ -122,14 +109,6 @@
                             <div class="cart-calculate-items"><h6>Podsumowanie koszyka</h6>
                                 <div class="table-responsive">
                                     <table class="table">
-<%--                                        <tr>--%>
-<%--                                            <td>Sub Total</td>--%>
-<%--                                            <td>$230</td>--%>
-<%--                                        </tr>--%>
-<%--                                        <tr>--%>
-<%--                                            <td>Shipping</td>--%>
-<%--                                            <td>$70</td>--%>
-<%--                                        </tr>--%>
                                         <tr class="total">
                                             <td>Cena całkowita koszyka</td>
                                             <td class="total-amount">${shoppingCart.totalPrice} zł</td>

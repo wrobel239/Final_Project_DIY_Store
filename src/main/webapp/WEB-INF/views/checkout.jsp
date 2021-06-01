@@ -57,7 +57,6 @@
     </div><!-- breadcrumb area end --><!-- checkout main wrapper start -->
     <div class="checkout-page-wrapper section-padding">
         <div class="container">
-<%--            <div class="row"><!-- Checkout Billing Details -->--%>
             <form:form method="post" modelAttribute="customerDetails" action="/shop/checkout">
                 <div class="col-lg-12">
                     <div class="checkout-billing-details-wrap"><h5 class="checkout-title">Dane zamawiającego</h5>
@@ -67,73 +66,50 @@
                                         <div class="single-input-item"><label for="f_name" class="required">Imię</label>
                                             <form:input path="firstName" id="f_name" placeholder="Imię"/>
                                             <form:errors path="firstName" cssClass="errors"/>
-<%--                                            <input type="text" id="f_name" placeholder="Imię" required/>--%>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="single-input-item"><label for="l_name" class="required">Nazwisko</label>
                                             <form:input path="lastName" id="l_name" placeholder="Nazwisko"/>
                                             <form:errors path="lastName" cssClass="errors"/>
-<%--                                            <input type="text" id="l_name" placeholder="Nazwisko" required/>--%>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="single-input-item"><label for="email" class="required">Email</label>
                                     <form:input path="email" id="email" placeholder="Email"/>
                                     <form:errors path="email" cssClass="errors"/>
-<%--                                    <input type="email" id="email" placeholder="Email" required/>--%>
                                 </div>
                                 <div class="single-input-item"><label for="com-name">Nazwa firmy(opcjonalnie)</label>
                                     <form:input path="companyName" id="com-name" placeholder="Nazwa firmy"/>
                                     <form:errors path="companyName" cssClass="errors"/>
-<%--                                    <input type="text" id="com-name" placeholder="Nazwa firmy"/>--%>
                                 </div>
                                 <div class="single-input-item"><label for="country" class="required">Kraj</label>
                                     <form:select path="country" items="${countries}" id="country"/>
                                     <form:errors path="country" cssClass="errors"/>
-<%--                                    <select name="country nice-select" id="country">--%>
-<%--                                    <option value="Afghanistan">Afghanistan</option>--%>
-<%--                                    <option value="Albania">Albania</option>--%>
-<%--                                    <option value="Algeria">Algeria</option>--%>
-<%--                                    <option value="Armenia">Armenia</option>--%>
-<%--                                    <option value="Bangladesh">Bangladesh</option>--%>
-<%--                                    <option value="India">India</option>--%>
-<%--                                    <option value="Pakistan">Pakistan</option>--%>
-<%--                                    <option value="England">England</option>--%>
-<%--                                    <option value="London">London</option>--%>
-<%--                                    <option value="London">London</option>--%>
-<%--                                    <option value="Chaina">China</option>--%>
-<%--                                    </select>--%>
                                 </div>
                                 <div class="single-input-item"><label for="street-address" class="required mt-20">Ulica i numer mieszkania</label>
                                     <form:input path="streetAddress" id="street-address" placeholder="Ulica i numer mieszkania"/>
                                     <form:errors path="streetAddress" cssClass="errors"/>
-<%--                                    <input type="text" id="street-address" placeholder="Ulica i numer mieszkania" required/>--%>
                                 </div>
                                 <div class="single-input-item"><label for="town" class="required">Miasto</label>
                                     <form:input path="town" id="town" placeholder="Miasto"/>
                                     <form:errors path="town" cssClass="errors"/>
-<%--                                    <input type="text" id="town" placeholder="Miasto" required/>--%>
                                 </div>
                                 <div class="single-input-item"><label for="state" class="required">Województwo</label>
                                     <form:input path="voivodeship" id="state" placeholder="Województwo"/>
                                     <form:errors path="voivodeship" cssClass="errors"/>
-<%--                                    <input type="text" id="state" placeholder="Województwo"/>--%>
                                 </div>
                                 <div class="single-input-item"><label for="postcode" class="required">Kod pocztowy</label>
                                     <form:input path="postcode" id="postcode" placeholder="Kod pocztowy"/>
                                     <form:errors path="postcode" cssClass="errors"/>
-<%--                                    <input type="text" id="postcode" placeholder="Kod pocztowy" required/>--%>
                                 </div>
                                 <div class="single-input-item"><label for="phone" class="required">Telefon</label>
                                     <form:input path="phone" id="phone" placeholder="Telefon"/>
                                     <form:errors path="phone" cssClass="errors"/>
-<%--                                    <input type="text" id="phone" placeholder="Telefon"/>--%>
                                 </div>
                                 <div class="single-input-item"><label for="ordernote">Dane dostawy (dodatkowe)</label>
                                     <form:textarea path="orderNote" id="ordernote" cols="30" rows="3" placeholder="Dane dodatkowe na temat zamówienia"/>
                                     <form:errors path="orderNote" cssClass="errors"/>
-<%--                                    <textarea name="ordernote" id="ordernote" cols="30" rows="3" placeholder="Dane dodatkowe na temat zamówienia"></textarea>--%>
                                 </div>
                         </div>
                     </div>
@@ -192,35 +168,6 @@
                                         </div>
                                     </div>
                                 </div>
-<%--                                <div class="single-payment-method show">--%>
-<%--                                    <div class="payment-method-name">--%>
-<%--                                        <div class="custom-control custom-radio"><input type="radio" id="cashon"--%>
-<%--                                                                                        name="paymentmethod"--%>
-<%--                                                                                        value="cash"--%>
-<%--                                                                                        class="custom-control-input"--%>
-<%--                                                                                        checked/><label--%>
-<%--                                                class="custom-control-label" for="cashon">Cash On Delivery</label></div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="single-payment-method">--%>
-<%--                                    <div class="payment-method-name">--%>
-<%--                                        <div class="custom-control custom-radio"><input type="radio" id="directbank"--%>
-<%--                                                                                        name="paymentmethod"--%>
-<%--                                                                                        value="bank"--%>
-<%--                                                                                        class="custom-control-input"/><label--%>
-<%--                                                class="custom-control-label" for="directbank">Direct Bank--%>
-<%--                                            Transfer</label></div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="single-payment-method">--%>
-<%--                                    <div class="payment-method-name">--%>
-<%--                                        <div class="custom-control custom-radio"><input type="radio" id="paypalpayment"--%>
-<%--                                                                                        name="paymentmethod"--%>
-<%--                                                                                        value="paypal"--%>
-<%--                                                                                        class="custom-control-input"/><label--%>
-<%--                                                class="custom-control-label" for="paypalpayment">Paypal</label></div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
                                 <div class="summary-footer-area">
                                     <button type="submit" class="btn btn-sqr">Złóż zamówienie</button>
                                 </div>
@@ -229,7 +176,6 @@
                     </div>
                 </div>
             </form:form>
-<%--            </div>--%>
         </div>
     </div><!-- checkout main wrapper end -->
 </main><!-- Scroll to top start -->

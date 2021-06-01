@@ -112,15 +112,6 @@
                             </c:forEach>
                         </div>
                         <!-- product item list wrapper end --><!-- start pagination area -->
-<%--                        <div class="paginatoin-area text-center">--%>
-<%--                            <ul class="pagination-box">--%>
-<%--                                <li><a class="previous" href="#"><i class="pe-7s-angle-left"></i></a></li>--%>
-<%--                                <li class="active"><a href="#">1</a></li>--%>
-<%--                                <li><a href="#">2</a></li>--%>
-<%--                                <li><a href="#">3</a></li>--%>
-<%--                                <li><a class="next" href="#"><i class="pe-7s-angle-right"></i></a></li>--%>
-<%--                            </ul>--%>
-<%--                        </div><!-- end pagination area -->--%>
                     </div>
                 </div><!-- shop main wrapper end -->
             </div>
