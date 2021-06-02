@@ -43,11 +43,9 @@ public class ProductListController {
         if (product.isPresent() && jSessionId != null) {
             if (product.get().isAvailable()) {
                 shoppingCartService.addToCartProduct(jSessionId.getValue(), product.get(), 1);
+                return "redirect:/shop/productlist";
             }
-        } else {
-            // tutaj może jeszcze wewnątrze id dodatkowy throw new
-            throw new EntityNotFoundException("Product not found or you don't have JSESSIONID");
         }
-        return "redirect:/shop/productlist";
+        throw new EntityNotFoundException("Produkt nie znaleziony lub jest niedostępny lub nie nie masz ciasteczka JSESSIONID");
     }
 }

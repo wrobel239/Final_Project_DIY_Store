@@ -22,12 +22,9 @@ public class CartItem {
     @Column(scale=2, precision = 11, name = "total_price")
     private BigDecimal totalPrice;
 
-//    tutaj walidacji nie może być, bo wywala błędy, bo pola te również walidowane, a wprowadzane tylko quantity
-//    @NotNull
     @ManyToOne(optional = false)
     private Product product;
 
-//    @NotNull
     @ManyToOne(optional = false)
     @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
@@ -52,7 +49,6 @@ public class CartItem {
         return totalPrice;
     }
 
-    // musi tutaj chyba być zwykły setter i potem metoda calculate
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }

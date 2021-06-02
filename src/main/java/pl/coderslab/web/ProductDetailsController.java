@@ -14,7 +14,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.Optional;
 
 @Controller
@@ -29,7 +28,6 @@ public class ProductDetailsController {
         this.shoppingCartService = shoppingCartService;
     }
 
-//    BigDecimal nie może być uwzględniany w formularzu w polu hidden i nie może być ustawiony gdy przekazywany obiekt do formularza
     @GetMapping("/productdetails/{id}")
     public String showProductDetails(@PathVariable long id, Model model) {
         Optional<Product> product = productService.get(id);
@@ -42,7 +40,7 @@ public class ProductDetailsController {
                 return "productDetails";
             }
         }
-        throw new EntityNotFoundException("Product not found or is unavailable");
+        throw new EntityNotFoundException("Produkt nie znaleziony lub jest niedostępny");
     }
 
     @PostMapping("/productdetails/{id}")
@@ -56,12 +54,9 @@ public class ProductDetailsController {
                     return "productDetails";
                 }
                 shoppingCartService.updateCartProduct(jSessionId.getValue(), product.get(), cartItem.getQuantity());
+                return "redirect:/shop/productdetails/" + id;
             }
-            // tutaj usunąć else i przełożyć return powyżej
-        } else {
-            // tutaj może jeszcze wewnątrze id dodatkowy throw new
-            throw new EntityNotFoundException("Product not found or you don't have JSESSIONID");
         }
-        return "redirect:/shop/productdetails/" + id;
+        throw new EntityNotFoundException("Produkt nie znaleziony lub jest niedostępny lub nie nie masz ciasteczka JSESSIONID");
     }
 }
