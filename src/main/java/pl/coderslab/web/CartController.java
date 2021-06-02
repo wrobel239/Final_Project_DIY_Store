@@ -34,7 +34,7 @@ public class CartController {
     }
 
     @GetMapping("/cart/decreaseQuantity/{id}")
-    public String decreaseQuantity(HttpServletRequest request, @PathVariable long id, Model model) {
+    public String decreaseQuantity(HttpServletRequest request, @PathVariable long id) {
         Cookie jSessionId = WebUtils.getCookie(request, "JSESSIONID");
         Optional<CartItem> cartItem = cartItemService.get(id);
         if (cartItem.isPresent() && jSessionId != null) {
@@ -68,12 +68,10 @@ public class CartController {
         if (product.isPresent() && jSessionId != null) {
             if (product.get().isAvailable()) {
                 shoppingCartService.addToCartProduct(jSessionId.getValue(), product.get(), 1);
+                return "redirect:/shop/cart";
             }
-        } else {
-            // tutaj może jeszcze wewnątrze id dodatkowy throw new
-            throw new EntityNotFoundException("Product not found or you don't have JSESSIONID");
         }
-        return "redirect:/shop/cart";
+        throw new EntityNotFoundException("Produkt nie znaleziony lub jest niedostępny lub nie nie masz ciasteczka JSESSIONID");
     }
 
     @GetMapping("/cart/remove-from-cart/{id}")

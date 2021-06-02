@@ -18,8 +18,8 @@ public class OrderedViewController {
         this.shoppingCartService = shoppingCartService;
     }
 
-    @GetMapping("/ordered")
-    public String orderedView(HttpServletRequest request, Model model){
-        return "ordered";
-    }
+//    @GetMapping("/ordered")
+//    public String orderedView(HttpServletRequest request, Model model){
+//        return "ordered";
+//    }
 }
