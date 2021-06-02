@@ -30,83 +30,47 @@ public class ShoppingCartService {
 
     public void addToCartProduct(String jSessionId, Product product, int quantity) {
         ShoppingCart shoppingCart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
-        if (shoppingCart == null) {
-            shoppingCart = new ShoppingCart();
-            shoppingCart.setSessionId(jSessionId);
-            shoppingCart.setShipping(false);
-            shoppingCart.setStatus(ShoppingCartStatus.NOT_APPROVED);
-            shoppingCartRepository.save(shoppingCart);
-        }
+        shoppingCart = checkIfDemandedToSetNewShoppingCart(jSessionId, shoppingCart);
         if (quantity >= 1) {
             int isUsed = -1;
-            for (CartItem item : shoppingCart.getCartItems()) {
-                Product productFromItems = item.getProduct();
-                if (productFromItems.equals(product)) {
-                    cartItemService.increaseQuantity(item, quantity);
-                    isUsed = 1;
-                }
+            Optional<CartItem> item = findCartItemWithProduct(shoppingCart, product);
+            if (item.isPresent()){
+                cartItemService.increaseQuantity(item.get(), quantity);
+                isUsed = 1;
             }
             if (isUsed < 0) {
                 cartItemService.createNewCartItem(shoppingCart, product, quantity);
             }
         }
-        ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
-        calculateTotalPriceAndTotalPriceWithShipping(cart);
-        shoppingCartRepository.save(cart);
+        setTotalPriceAndTotalPriceWithShipping(jSessionId);
     }
 
-    public void decreaseQuantity(ShoppingCart shoppingCart, CartItem cartItem, int quantity) {
-        // tutaj mogłoby być porównywanie po id CartItem, przemyśleć kod, mogłoby być jeszcze coś takiego
-//        if (cartItem.getShoppingCart().getId() == shoppingCart.getId()) -- to może sporo uprościć
-        for (CartItem item : shoppingCart.getCartItems()) {
-            Product productFromItems = item.getProduct();
-            if (productFromItems.equals(cartItem.getProduct())) {
-                cartItemService.decreaseQuantity(cartItem, quantity);
-            }
-        }
-        Optional<ShoppingCart> cart = get(shoppingCart.getId());
-        calculateTotalPriceAndTotalPriceWithShipping(cart.get());
-        shoppingCartRepository.save(cart.get());
+    public void decreaseQuantity(String jSessionId, CartItem cartItem, int quantity) {
+        checkIfPermittedAccessToCartItem(jSessionId, cartItem);
+        cartItemService.decreaseQuantity(cartItem, quantity);
+        setTotalPriceAndTotalPriceWithShipping(jSessionId);
     }
 
     public void removeCartItem(String jSessionId, CartItem cartItem) {
-        // tutaj jeszcze można by dać sprawdzenie, czy status koszyka not_approved
-        if (cartItem.getShoppingCart().getSessionId() != null) {
-            if (cartItem.getShoppingCart().getSessionId().equals(jSessionId)) {
-                cartItemService.deleteById(cartItem);
-            }
-        }
-        ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
-        calculateTotalPriceAndTotalPriceWithShipping(cart);
-        shoppingCartRepository.save(cart);
+        // niekoniecznie tutaj jeszcze można by dać sprawdzenie, czy status koszyka not_approved
+        checkIfPermittedAccessToCartItem(jSessionId, cartItem);
+        cartItemService.deleteById(cartItem);
+        setTotalPriceAndTotalPriceWithShipping(jSessionId);
     }
 
     public void updateCartProduct(String jSessionId, Product product, int quantity) {
         ShoppingCart shoppingCart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
-        if (shoppingCart == null) {
-            shoppingCart = new ShoppingCart();
-            shoppingCart.setSessionId(jSessionId);
-            shoppingCart.setShipping(false);
-            shoppingCart.setStatus(ShoppingCartStatus.NOT_APPROVED);
-            // może tutaj ustawić jeszcze set TotalPrice i TotalPriceWithShipping na 0
-            shoppingCartRepository.save(shoppingCart);
-        }
+        shoppingCart = checkIfDemandedToSetNewShoppingCart(jSessionId, shoppingCart);
         int isUsed = -1;
-        // zamiast tego for może stream - przy refactor o tym pomyśleć !!!
-        for (CartItem item : shoppingCart.getCartItems()) {
-            Product productFromItems = item.getProduct();
-            if (productFromItems.equals(product)) {
-                // tutaj zrobić update - tylko tutaj zmiana względem add
-                cartItemService.updateCartItem(item, quantity);
-                isUsed = 1;
-            }
+        Optional<CartItem> item = findCartItemWithProduct(shoppingCart, product);
+        if(item.isPresent()){
+            cartItemService.updateCartItem(item.get(), quantity);
+            isUsed = 1;
         }
         if (isUsed < 0) {
             cartItemService.createNewCartItem(shoppingCart, product, quantity);
         }
-        ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
-        calculateTotalPriceAndTotalPriceWithShipping(cart);
-        shoppingCartRepository.save(cart);
+        setTotalPriceAndTotalPriceWithShipping(jSessionId);
     }
 
     public void updateCartItem(String jSessionId, CartItem cartItem, CartItem item){
@@ -116,9 +80,7 @@ public class ShoppingCartService {
         } else {
             throw new EntityNotFoundException("Id CartItem przekazanego w formularzu i podanego w URL są różne");
         }
-        ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
-        calculateTotalPriceAndTotalPriceWithShipping(cart);
-        shoppingCartRepository.save(cart);
+        setTotalPriceAndTotalPriceWithShipping(jSessionId);
     }
 
     public void updateShipping(ShoppingCart shoppingCart, String shipping){
@@ -132,7 +94,7 @@ public class ShoppingCartService {
     }
 
     public void checkIfPermittedAccessToCartItem(String jSessionId, CartItem cartItem) {
-        // tutaj jeszcze można by dać sprawdzenie, czy status koszyka not_approved
+        // niekoniecznie tutaj jeszcze można by dać sprawdzenie, czy status koszyka not_approved
         if (cartItem.getShoppingCart().getSessionId() != null) {
             if (!cartItem.getShoppingCart().getSessionId().equals(jSessionId)) {
                 throw new EntityNotFoundException("Nie masz dostępu do danego CartItem");
@@ -169,5 +131,28 @@ public class ShoppingCartService {
         shoppingCart.setStatus(ShoppingCartStatus.APPROVED);
         shoppingCart.setDateOfOrder(LocalDateTime.now());
         shoppingCartRepository.save(shoppingCart);
+    }
+
+    public ShoppingCart checkIfDemandedToSetNewShoppingCart(String jSessionId, ShoppingCart shoppingCart){
+        if (shoppingCart == null) {
+            shoppingCart = new ShoppingCart();
+            shoppingCart.setSessionId(jSessionId);
+            shoppingCart.setShipping(false);
+            shoppingCart.setStatus(ShoppingCartStatus.NOT_APPROVED);
+            shoppingCartRepository.save(shoppingCart);
+        }
+        return shoppingCart;
+    }
+
+    public Optional<CartItem> findCartItemWithProduct(ShoppingCart shoppingCart, Product product){
+        return shoppingCart.getCartItems().stream()
+                .filter(item -> item.getProduct().equals(product))
+                .findFirst();
+    }
+
+    public void setTotalPriceAndTotalPriceWithShipping (String jSessionId){
+        ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
+        calculateTotalPriceAndTotalPriceWithShipping(cart);
+        shoppingCartRepository.save(cart);
     }
 }

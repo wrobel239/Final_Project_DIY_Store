@@ -79,7 +79,7 @@
                                         <span>${cartItem.product.price} zł</span>
                                     </td>
                                     <td class="pro-quantity">
-                                        <a href="/shop/cart/${shoppingCart.id}/decreaseQuantity/${cartItem.id}/1">
+                                        <a href="/shop/cart/decreaseQuantity/${cartItem.id}">
                                             <span class="dec qtybtn">-</span>
                                         </a>
                                         <span>${cartItem.quantity}</span>

@@ -33,22 +33,15 @@ public class CartController {
         this.cartItemService = cartItemService;
     }
 
-    @GetMapping("/cart/{idCart}/decreaseQuantity/{idCartItem}/{quantity}")
-    public String decreaseQuantity(HttpServletRequest request, @PathVariable long idCart, @PathVariable long idCartItem, @PathVariable int quantity, Model model) {
+    @GetMapping("/cart/decreaseQuantity/{id}")
+    public String decreaseQuantity(HttpServletRequest request, @PathVariable long id, Model model) {
         Cookie jSessionId = WebUtils.getCookie(request, "JSESSIONID");
-        Optional<ShoppingCart> shoppingCart = shoppingCartService.get(idCart);
-        Optional<CartItem> cartItem = cartItemService.get(idCartItem);
-        if (shoppingCart.isPresent() && cartItem.isPresent() && jSessionId != null && quantity >= 1) {
-            ShoppingCart cart = shoppingCart.get();
-            // ten if tylko na chwilę próby zakomentowany
-            if (jSessionId.getValue().equals(cart.getSessionId())) {
-                shoppingCartService.decreaseQuantity(cart, cartItem.get(), quantity);
-            }
+        Optional<CartItem> cartItem = cartItemService.get(id);
+        if (cartItem.isPresent() && jSessionId != null) {
+            shoppingCartService.decreaseQuantity(jSessionId.getValue(), cartItem.get(), 1);
         } else {
-            // tutaj może jeszcze wewnątrze id dodatkowy throw new
-            throw new EntityNotFoundException("ShoppingCart not found or you don't have access");
+            throw new EntityNotFoundException("Dany CartItem nie znaleziony lub nie masz ciasteczka JSESSIONID");
         }
-        // tutaj dokończyć
         return "redirect:/shop/cart";
     }
 
@@ -63,7 +56,7 @@ public class CartController {
             }
             model.addAttribute("shoppingCart", shoppingCart);
         } else {
-            throw new EntityNotFoundException("You don't have JSESSIONID");
+            throw new EntityNotFoundException("Nie masz ciasteczka JSESSIONID");
         }
         return "cart";
     }
@@ -90,8 +83,7 @@ public class CartController {
         if (cartItem.isPresent() && jSessionId != null) {
             shoppingCartService.removeCartItem(jSessionId.getValue(), cartItem.get());
         } else {
-            // tutaj może jeszcze wewnątrze id dodatkowy throw new
-            throw new EntityNotFoundException("CartItem not found or you don't have JSESSIONID");
+            throw new EntityNotFoundException("Dany CartItem nie znaleziony lub nie masz ciasteczka JSESSIONID");
         }
         return "redirect:/shop/cart";
     }
