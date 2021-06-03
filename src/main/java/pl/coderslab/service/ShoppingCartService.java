@@ -7,6 +7,7 @@ import pl.coderslab.repository.ShoppingCartRepository;
 import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +27,10 @@ public class ShoppingCartService {
 
     public ShoppingCart getByJSessionId(String jSessionId) {
         return shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
+    }
+
+    public List<ShoppingCart> getAll(){
+        return shoppingCartRepository.findAll();
     }
 
     public void addToCartProduct(String jSessionId, Product product, int quantity) {
@@ -154,5 +159,13 @@ public class ShoppingCartService {
         ShoppingCart cart = shoppingCartRepository.findFirstBySessionIdOrderByCreatedDesc(jSessionId);
         calculateTotalPriceAndTotalPriceWithShipping(cart);
         shoppingCartRepository.save(cart);
+    }
+
+    public void saveEditedShoppingCart(ShoppingCart shoppingCart, ShoppingCartStatus status){
+        shoppingCart.setStatus(status);
+        if (status.equals(ShoppingCartStatus.REALIZED)) {
+            shoppingCart.setDateOfRealization(LocalDateTime.now());
+        }
+        shoppingCartRepository.save(shoppingCart);
     }
 }
