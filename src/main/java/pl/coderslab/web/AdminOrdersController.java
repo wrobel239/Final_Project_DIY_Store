@@ -12,7 +12,6 @@ import pl.coderslab.service.ShoppingCartService;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -81,15 +80,6 @@ public class AdminOrdersController {
                 model.addAttribute("statuses", getCartStatusPojo());
                 return "adminOrderEdit";
             }
-//            if (shoppingCart.get().getDateOfOrder() == null && shoppingCartEditPojo.getDateOfRealization() != null){
-//                throw new EntityNotFoundException("Nie można ustawić czasu realizacji dla koszyka w trakcie sporządzania");
-//            }
-//            if (shoppingCartEditPojo.getDateOfRealization() != null) {
-//                if (shoppingCartEditPojo.getDateOfRealization().isBefore(shoppingCart.get().getDateOfOrder()) ||
-//                        shoppingCartEditPojo.getDateOfRealization().isAfter(LocalDateTime.now())) {
-//                    throw new EntityNotFoundException("Data realizacji jest przed datą wpłynięcia zamówienia lub po czasie aktualnym");
-//                }
-//            }
             shoppingCartService.saveEditedShoppingCart(shoppingCart.get(), shoppingCartEditPojo.getStatus());
             return "redirect:/shop/admin/orders";
         }

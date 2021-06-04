@@ -107,44 +107,6 @@
                                                 </div>
                                             </div>
                                         </div><!-- Single Tab Content End --><!-- Single Tab Content Start -->
-
-<%--                                        <div &lt;%&ndash;class="tab-pane fade"&ndash;%&gt; id="orders" role="tabpanel">--%>
-<%--                                            <div class="myaccount-content"><h5>Zamówienia</h5>--%>
-<%--                                                <div class="myaccount-table table-responsive text-center">--%>
-<%--                                                    <table class="table table-bordered">--%>
-<%--                                                        <thead class="thead-light">--%>
-<%--                                                        <tr>--%>
-<%--                                                            <th>Dane zamawiającego</th>--%>
-<%--                                                            <th>Data zamówienia</th>--%>
-<%--                                                            <th>Status</th>--%>
-<%--                                                            <th>Cena całkowita</th>--%>
-<%--                                                            <th>Detale i edycja</th>--%>
-<%--                                                        </tr>--%>
-<%--                                                        </thead>--%>
-<%--                                                        <tbody>--%>
-<%--                                                        <c:forEach items="${shoppingCarts}" var="shoppingCart">--%>
-<%--                                                            <tr>--%>
-<%--                                                                <td>${shoppingCart.customerDetails.firstName},--%>
-<%--                                                                        ${shoppingCart.customerDetails.lastName},--%>
-<%--                                                                        ${shoppingCart.customerDetails.postcode},--%>
-<%--                                                                        ${shoppingCart.customerDetails.town},--%>
-<%--                                                                        ${shoppingCart.customerDetails.streetAddress},--%>
-<%--                                                                        ${shoppingCart.customerDetails.email},--%>
-<%--                                                                        ${shoppingCart.customerDetails.phone}--%>
-<%--                                                                </td>--%>
-<%--                                                                <td>${shoppingCart.dateOfOrder}</td>--%>
-<%--                                                                <td>${shoppingCart.status}</td>--%>
-<%--                                                                <td>${shoppingCart.totalPriceWithShipping} zł</td>--%>
-<%--                                                                <td><a href="/shop/admin/orders/details/${shoppingCart.id}" class="btn btn-sqr">Detale</a>--%>
-<%--                                                                    <a href="/shop/admin/orders/edit/${shoppingCart.id}" class="btn btn-sqr">Edycja</a>--%>
-<%--                                                                </td>--%>
-<%--                                                            </tr>--%>
-<%--                                                        </c:forEach>--%>
-<%--                                                        </tbody>--%>
-<%--                                                    </table>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div><!-- Single Tab Content End --><!-- Single Tab Content Start -->--%>
                                     </div>
                                 </div><!-- My Account Tab Content End -->
                             </div>

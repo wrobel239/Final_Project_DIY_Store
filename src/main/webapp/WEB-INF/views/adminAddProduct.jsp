@@ -117,44 +117,6 @@
                                                 </div>
                                             </div>
                                         </div><!-- Single Tab Content End -->
-<%--                                        <div &lt;%&ndash;class="tab-pane fade"&ndash;%&gt; id="orders" role="tabpanel">--%>
-<%--                                            <div class="myaccount-content"><h5>Produkty</h5>--%>
-<%--                                                <div class="cart-table table-responsive text-center">--%>
-<%--                                                    <table class="table table-bordered">--%>
-<%--                                                        <thead>--%>
-<%--                                                        <tr>--%>
-<%--                                                            <th class="pro-thumbnail">Zdjęcie</th>--%>
-<%--                                                            <th class="pro-title">Nazwa prodkutu</th>--%>
-<%--                                                            <th class="pro-price">Cena</th>--%>
-<%--                                                            <th class="pro-title">Dostępność</th>--%>
-<%--                                                            <th class="pro-quantity">Edycja</th>--%>
-<%--                                                        </tr>--%>
-<%--                                                        </thead>--%>
-<%--                                                        <tbody>--%>
-<%--                                                        <c:forEach items="${products}" var="product">--%>
-<%--                                                            <tr>--%>
-<%--                                                                <td class="pro-thumbnail">--%>
-<%--                                                                    <img class="img-fluid" src="${product.srcImage}" alt="${product.altImage}"/>--%>
-<%--                                                                </td>--%>
-<%--                                                                <td class="pro-title">--%>
-<%--                                                                    <a>${product.name}</a>--%>
-<%--                                                                </td>--%>
-<%--                                                                <td class="pro-price">--%>
-<%--                                                                    <span>${product.price} zł</span>--%>
-<%--                                                                </td>--%>
-<%--                                                                <td class="pro-title">--%>
-<%--                                                                    <span>${product.isAvailable()}</span>--%>
-<%--                                                                </td>--%>
-<%--                                                                <td class="pro-quantity">--%>
-<%--                                                                    <a href="/shop/admin/products/edit/${product.id}" class="btn btn-sqr">Edycja</a>--%>
-<%--                                                                </td>--%>
-<%--                                                            </tr>--%>
-<%--                                                        </c:forEach>--%>
-<%--                                                        </tbody>--%>
-<%--                                                    </table>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div><!-- Single Tab Content End --><!-- Single Tab Content Start -->--%>
                                     </div>
                                 </div><!-- My Account Tab Content End -->
                             </div>

@@ -76,55 +76,10 @@
                                 </div><!-- My Account Tab Menu End --><!-- My Account Tab Content Start -->
                                 <div class="col-lg-9 col-md-8">
                                     <div class="tab-content" id="myaccountContent"><!-- Single Tab Content Start -->
-<%--                                        <div &lt;%&ndash;class="tab-pane fade"&ndash;%&gt; id="orders" role="tabpanel">--%>
-<%--                                            <div class="myaccount-content"><h5>Zamówienia</h5>--%>
-<%--                                                <div class="myaccount-table table-responsive text-center">--%>
-<%--                                                    <table class="table table-bordered">--%>
-<%--                                                        <thead class="thead-light">--%>
-<%--                                                        <tr>--%>
-<%--                                                            <th>Dane zamawiającego</th>--%>
-<%--                                                            <th>Data zamówienia</th>--%>
-<%--                                                            <th>Status</th>--%>
-<%--                                                            <th>Cena całkowita</th>--%>
-<%--                                                            <th>Detale i edycja</th>--%>
-<%--                                                        </tr>--%>
-<%--                                                        </thead>--%>
-<%--                                                        <tbody>--%>
-<%--                                                        <c:forEach items="${shoppingCarts}" var="shoppingCart">--%>
-<%--                                                            <tr>--%>
-<%--                                                                <td>${shoppingCart.customerDetails.firstName},--%>
-<%--                                                                        ${shoppingCart.customerDetails.lastName},--%>
-<%--                                                                        ${shoppingCart.customerDetails.postcode},--%>
-<%--                                                                        ${shoppingCart.customerDetails.town},--%>
-<%--                                                                        ${shoppingCart.customerDetails.streetAddress},--%>
-<%--                                                                        ${shoppingCart.customerDetails.email},--%>
-<%--                                                                        ${shoppingCart.customerDetails.phone}--%>
-<%--                                                                </td>--%>
-<%--                                                                <td>${shoppingCart.dateOfOrder}</td>--%>
-<%--                                                                <td>${shoppingCart.status}</td>--%>
-<%--                                                                <td>${shoppingCart.totalPriceWithShipping} zł</td>--%>
-<%--                                                                <td><a href="/shop/admin/orders/details/${shoppingCart.id}" class="btn btn-sqr">Detale</a>--%>
-<%--                                                                    <a href="/shop/admin/orders/edit/${shoppingCart.id}" class="btn btn-sqr">Edycja</a>--%>
-<%--                                                                </td>--%>
-<%--                                                            </tr>--%>
-<%--                                                        </c:forEach>--%>
-<%--                                                        </tbody>--%>
-<%--                                                    </table>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div><!-- Single Tab Content End --><!-- Single Tab Content Start -->--%>
-
-                                        <%--                                        to do formularzy--%>
-
                                         <div <%-- class="tab-pane fade"--%> id="account-info" role="tabpanel">
                                             <div class="myaccount-content"><h5>Edycja danych koszyka</h5>
                                                 <div class="account-details-form">
                                                     <form:form method="post" modelAttribute="shoppingCartEditPojo">
-<%--                                                        <div class="single-input-item">--%>
-<%--                                                            <label for="dateOfRealization">Data realizacji</label>--%>
-<%--                                                            <form:input path="dateOfRealization" id="dateOfRealization"/>--%>
-<%--                                                            <form:errors path="dateOfRealization" cssClass="errors"/>--%>
-<%--                                                        </div>--%>
                                                         <div class="single-input-item">
                                                             <label for="status" class="required">Wybór statusu</label>
                                                             <form:select path="status" items="${statuses}" itemValue="status" itemLabel="description" id="status"/>
@@ -134,60 +89,6 @@
                                                             <button type="submit" class="btn btn-sqr">Zapisz zmiany</button>
                                                         </div>
                                                     </form:form>
-
-<%--                                                    <form action="#">--%>
-<%--                                                        <div class="row">--%>
-<%--                                                            <div class="col-lg-6">--%>
-<%--                                                                <div class="single-input-item"><label for="first-name"--%>
-<%--                                                                                                      class="required">First--%>
-<%--                                                                    Name</label><input type="text" id="first-name"--%>
-<%--                                                                                       placeholder="First Name"/></div>--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="col-lg-6">--%>
-<%--                                                                <div class="single-input-item"><label for="last-name"--%>
-<%--                                                                                                      class="required">Last--%>
-<%--                                                                    Name</label><input type="text" id="last-name"--%>
-<%--                                                                                       placeholder="Last Name"/></div>--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="single-input-item"><label for="display-name"--%>
-<%--                                                                                              class="required">Display--%>
-<%--                                                            Name</label><input type="text" id="display-name"--%>
-<%--                                                                               placeholder="Display Name"/></div>--%>
-<%--                                                        <div class="single-input-item"><label for="email"--%>
-<%--                                                                                              class="required">Email--%>
-<%--                                                            Addres</label><input type="email" id="email"--%>
-<%--                                                                                 placeholder="Email Address"/></div>--%>
-<%--                                                        <fieldset>--%>
-<%--                                                            <legend>Password change</legend>--%>
-<%--                                                            <div class="single-input-item"><label for="current-pwd"--%>
-<%--                                                                                                  class="required">Current--%>
-<%--                                                                Password</label><input type="password" id="current-pwd"--%>
-<%--                                                                                       placeholder="Current Password"/>--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="row">--%>
-<%--                                                                <div class="col-lg-6">--%>
-<%--                                                                    <div class="single-input-item"><label for="new-pwd"--%>
-<%--                                                                                                          class="required">New--%>
-<%--                                                                        Password</label><input type="password"--%>
-<%--                                                                                               id="new-pwd"--%>
-<%--                                                                                               placeholder="New Password"/>--%>
-<%--                                                                    </div>--%>
-<%--                                                                </div>--%>
-<%--                                                                <div class="col-lg-6">--%>
-<%--                                                                    <div class="single-input-item"><label--%>
-<%--                                                                            for="confirm-pwd" class="required">Confirm--%>
-<%--                                                                        Password</label><input type="password"--%>
-<%--                                                                                               id="confirm-pwd"--%>
-<%--                                                                                               placeholder="Confirm Password"/>--%>
-<%--                                                                    </div>--%>
-<%--                                                                </div>--%>
-<%--                                                            </div>--%>
-<%--                                                        </fieldset>--%>
-<%--                                                        <div class="single-input-item">--%>
-<%--                                                            <button class="btn btn-sqr">Save Changes</button>--%>
-<%--                                                        </div>--%>
-<%--                                                    </form>--%>
                                                 </div>
                                             </div>
                                         </div><!-- Single Tab Content End -->
