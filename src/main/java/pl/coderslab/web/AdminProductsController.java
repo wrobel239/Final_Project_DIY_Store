@@ -5,14 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.model.AvailabilityProduct;
-import pl.coderslab.model.AvailabilityProductPojo;
 import pl.coderslab.model.Product;
 import pl.coderslab.model.ProductPojo;
 import pl.coderslab.service.ProductService;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
