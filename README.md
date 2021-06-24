@@ -1,6 +1,6 @@
 # Final_Project_DIY_Store
-DIY store - online shop
-This project is an online store application where a user who is not logged in can make purchases (using the JSESSIONID cookie), order a delivery and choose a payment method.
+* DIY store - online shop
+* This project is an online store application where a user who is not logged in can make purchases (using the JSESSIONID cookie), order a delivery and choose a payment method.
 # How to start?
 1. Create a fork of the repository.
 2. Clone to your computer.
