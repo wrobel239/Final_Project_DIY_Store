@@ -1,9 +1,31 @@
 # Final_Project_DIY_Store
 DIY store - online shop
+This project is an online store application where a user who is not logged in can make purchases (using the JSESSIONID cookie), order a delivery and choose a payment method.
 # How to start?
 1. Create a fork of the repository.
 2. Clone to your computer.
 3. Import project as a Maven project (e.g. in IntelliJ).
+# Implemented functionalities
+1. USER
+* adding / removing a product from cart
+* editing the quantity of items of the product, reduce quantity by 1 or increase by 1
+* adding shipping
+* checkout (adding the method of payment and billing details)
+2. ADMIN
+* editing orders
+* looking over orders history
+* looking over products list
+* adding / editing product
+# Used technologies
+* Java 11
+* Spring MVC
+* Spring Data
+* Hibernate
+* MySQL
+* Jsp
+* Front-end: HTML, CSS, JS, Bootstrap4
+# Idea for development
+Using Spring Security for user and admin registration and login. Creating a dashboard for a logged in user, in which the order history would be available and the ability to edit the address and some user data such as password. In addition, I would like to extend the application with the possibility of introducing discounts, coupons and promotions.
 # Views available in the application
 * Home page
 
